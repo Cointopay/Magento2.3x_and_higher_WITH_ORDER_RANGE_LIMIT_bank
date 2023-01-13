@@ -37,11 +37,11 @@
             <!--/ko-->
         </div>
         <div class="field required">
-            <label data-bind="attr: {for: getCode() + '_transaction_result'}" class="label cointopay-margin">
+            <label data-bind="attr: {for: getCode() + '_transaction_result'}" class="label cointopaybank-margin">
                 <span><!-- ko i18n: 'Select the currency to settle your payment:'--><!-- /ko --></span>
             </label>
 
-            <div class="control cointopay-margin">
+            <div class="control cointopaybank-margin">
                 <select name="payment[transaction_result]"
                         class="select cointopaybank_coin_val"
                         data-bind="
@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <div class="actions-toolbar cointopay-margin">
+        <div class="actions-toolbar cointopaybank-margin">
             <div class="primary">
                 <button class="action primary checkout cointopaybankorder"
                         type="submit"

@@ -53,7 +53,7 @@
                 </field>
 				<field id="bank_cointopay_max_amount" translate="label" type="text" sortOrder="33" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Maximum Order Total</label>
-					<validate>required-entry cc-cointopay-validate-total</validate>
+					<validate>required-entry bank-cointopay-validate-total</validate>
 					 <depends>
                         <field id="deliveryinstruction/general/enable">1</field>
                     </depends>
