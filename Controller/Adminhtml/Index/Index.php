@@ -1,6 +1,6 @@
 <?php
 
-namespace CointopayBank\Paymentgateway\Controller\Adminhtml\Index;
+namespace CointopayBank\PaymentGateway\Controller\Adminhtml\Index;
 
 class Index extends \Magento\Backend\App\Action
 {
