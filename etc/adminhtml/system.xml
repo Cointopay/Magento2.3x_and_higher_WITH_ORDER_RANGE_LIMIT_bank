@@ -67,7 +67,7 @@
                     <label>Payment Action</label>
                     <source_model>CointopayBank\PaymentGateway\Model\Adminhtml\Source\PaymentAction</source_model>
                 </field>
-				<field id="bank_order_status" translate="label" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+				<field id="order_status" translate="label" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
 					   <label>New Order Status</label>
 					   <source_model>Magento\Sales\Model\Config\Source\Order\Status\Newprocessing</source_model>
 				</field>
