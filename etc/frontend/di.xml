@@ -9,15 +9,16 @@
     <type name="Magento\Checkout\Model\CompositeConfigProvider">
         <arguments>
             <argument name="configProviders" xsi:type="array">
-                <item name="cointopaybank_gateway_config_provider" xsi:type="object">CointopayBank\PaymentGateway\Model\Ui\ConfigProvider</item>
+                <item name="cointopay_gateway_config_provider" xsi:type="object">Cointopay\PaymentGateway\Model\Ui\ConfigProvider</item>
             </argument>
         </arguments>
     </type>
-    <type name="CointopayBank\PaymentGateway\Block\Info">
+    <type name="Cointopay\PaymentGateway\Block\Info">
         <arguments>
             <argument name="data" xsi:type="array">
                 <item xsi:type="string" name="is_secure_mode">1</item>
             </argument>
         </arguments>
     </type>
+	<preference for="Magento\Checkout\Block\Onepage\Success" type="Cointopay\PaymentGateway\Block\Thankyou" />
 </config>

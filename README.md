@@ -1,6 +1,8 @@
-## Official Cointopay Bank Magento 2.x plugin
+## Official Cointopay Magento 2.x plugin
 
 Please follow the Magento install instructions mentioned here: <a href="https://docs.google.com/document/d/1hwf0kMoCFeNQWJGxyRnj7sspiUVtaFHkJ7cMj8hRJx0/edit?usp=sharing" target="_new">download magento documentation</a> or direct link: https://docs.google.com/document/d/1hwf0kMoCFeNQWJGxyRnj7sspiUVtaFHkJ7cMj8hRJx0/edit?usp=sharing
+
+View this Cointopay payment plugin on MARKETPLACE.MAGENTO.COM: https://marketplace.magento.com/cointopay-paymentgateway.html
 
 ## Requirements
 
@@ -11,15 +13,34 @@ Please follow the Magento install instructions mentioned here: <a href="https://
 
 ## Installation
 
+### Install the Cointopay Magento 2 composer package
 
+```composer require cointopay/paymentgateway```
+
+### Enable the extension in Magento 2
+
+```bin/magento module:enable Cointopay_PaymentGateway --clear-static-content```
+
+### Setup the extension and refresh cache
+
+```bin/magento setup:upgrade```
+
+```bin/magento cache:flush```
+
+```bin/magento setup:di:compile```
+
+```bin/magento setup:static-content:deploy```
 
 
 ## Configuration
 
 Once installed, this module can be configured in the usual way by logging into the Magento admin area and navigating to:
 
-Stores > Configuration > Sales > Payment Methods > Cointopay Bank International
+Stores > Configuration > Sales > Payment Methods > Cointopay International
 
+More details are available in the Cointopay:
+
+https://docs.google.com/document/d/1hwf0kMoCFeNQWJGxyRnj7sspiUVtaFHkJ7cMj8hRJx0/edit?usp=sharing
 
 ### Support or Contact
 

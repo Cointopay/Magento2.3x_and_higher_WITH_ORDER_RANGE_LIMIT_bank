@@ -2,32 +2,37 @@
 /**
  * Copyright © 2018 Cointopay. All rights reserved.
  * See COPYING.txt for license details.
+ *
+ * @author  cointopay <info@cointopay.com>
+ * @license See COPYING.txt for license details.
  */
-namespace CointopayBank\PaymentGateway\Gateway\Validator;
+
+namespace Cointopay\PaymentGateway\Gateway\Validator;
 
 use Magento\Payment\Gateway\Validator\AbstractValidator;
 use Magento\Payment\Gateway\Validator\ResultInterface;
-use CointopayBank\PaymentGateway\Gateway\Http\Client\ClientMock;
+use Cointopay\PaymentGateway\Gateway\Http\Client\ClientMock;
 
 class ResponseCodeValidator extends AbstractValidator
 {
-    const RESULT_CODE = 'RESULT_CODE';
+    protected const RESULT_CODE = 'RESULT_CODE';
 
     /**
      * Performs validation of result code
      *
-     * @param array $validationSubject
+     * @param array $validationSubject Subject
+     *
      * @return ResultInterface
      */
     public function validate(array $validationSubject)
     {
-        if (!isset($validationSubject['response']) || !is_array($validationSubject['response'])) {
+        if (isset($validationSubject['response']) === false || is_array($validationSubject['response']) !== true) {
             throw new \InvalidArgumentException('Response does not exist');
         }
 
         $response = $validationSubject['response'];
 
-        if ($this->isSuccessfulTransaction($response)) {
+        if ($this->isSuccessfulTransaction($response) === true) {
             return $this->createResult(
                 true,
                 []
@@ -38,15 +43,18 @@ class ResponseCodeValidator extends AbstractValidator
                 [__('Gateway rejected the transaction.')]
             );
         }
-    }
+    }//end validate()
 
     /**
-     * @param array $response
+     * Checking Transaction response
+     *
+     * @param array $response Response
+     *
      * @return bool
      */
     private function isSuccessfulTransaction(array $response)
     {
         return isset($response[self::RESULT_CODE])
         && $response[self::RESULT_CODE] !== ClientMock::FAILURE;
-    }
-}
+    }//end isSuccessfulTransaction()
+}//end class

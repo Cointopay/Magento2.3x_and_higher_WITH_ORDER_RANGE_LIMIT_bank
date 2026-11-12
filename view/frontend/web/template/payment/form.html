@@ -1,9 +1,3 @@
-<!--
-/**
- * Copyright © 2018 Cointopay. All rights reserved.
- * See COPYING.txt for license details.
- */
--->
 <style type="text/css">
 .cointopay-margin {
     margin-bottom: 12px;
@@ -16,7 +10,7 @@
         <input type="radio"
                name="payment[method]"
                class="radio"
-               data-bind="attr: {'id': getCode()}, value: getCode(), checked: isChecked, click: selectPaymentMethod, visible: isRadioButtonVisible()"/>
+               data-bind="attr: {'id': getCode()}, value: getCode(), checked: isChecked, click: selectPaymentMethod, visible: isRadioButtonVisible()">
         <label class="label" data-bind="attr: {'for': getCode()}">
             <span data-bind="text: getTitle()"></span>
         </label>
@@ -37,13 +31,13 @@
             <!--/ko-->
         </div>
         <div class="field required">
-            <label data-bind="attr: {for: getCode() + '_transaction_result'}" class="label cointopaybank-margin">
-                <span><!-- ko i18n: 'Select the currency to settle your payment:'--><!-- /ko --></span>
+            <label data-bind="attr: {for: getCode() + '_transaction_result'}" class="label cointopay-margin">
+                <span><!-- ko i18n: 'Select Crypto Currency:'--><!-- /ko --></span>
             </label>
 
-            <div class="control cointopaybank-margin">
+            <div class="control cointopay-margin">
                 <select name="payment[transaction_result]"
-                        class="select cointopaybank_coin_val"
+                        class="select cointopay_coin_val"
                         data-bind="
                                   options: getTransactionResults(),
                                   optionsValue: 'value',
@@ -53,9 +47,9 @@
             </div>
         </div>
 
-        <div class="actions-toolbar cointopaybank-margin">
+        <div class="actions-toolbar cointopay-margin">
             <div class="primary">
-                <button class="action primary checkout cointopaybankorder"
+                <button class="action primary checkout cointopay-order"
                         type="submit"
                         data-bind="
                         click: placeOrder,
