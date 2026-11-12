@@ -3,7 +3,7 @@
  * Copyright © 2018 Cointopay. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace CointopayBank\PaymentGateway\Observer;
+namespace CointopayCC\PaymentGateway\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
 
@@ -74,22 +74,22 @@ class SalesOrderPlaceAfterObserver implements ObserverInterface
     /**
     * Merchant ID
     */
-    const XML_PATH_MERCHANT_ID = 'payment/cointopaybank_gateway/bank_merchant_gateway_id';
+    const XML_PATH_MERCHANT_ID = 'payment/cointopaycc_gateway/cc_merchant_gateway_id';
 
     /**
     * Merchant COINTOPAY API Key
     */
-    const XML_PATH_MERCHANT_KEY = 'payment/cointopaybank_gateway/bank_merchant_gateway_key';
+    const XML_PATH_MERCHANT_KEY = 'payment/cointopaycc_gateway/cc_merchant_gateway_key';
 
     /**
     * Merchant COINTOPAY SECURITY Key
     */
-    const XML_PATH_MERCHANT_SECURITY = 'payment/cointopaybank_gateway/bank_merchant_gateway_security';
+    const XML_PATH_MERCHANT_SECURITY = 'payment/cointopaycc_gateway/cc_merchant_gateway_security';
 	
 	/**
     * Merchant COINTOPAY ORDER STATUS
     */
-    const XML_PATH_ORDER_STATUS = 'payment/cointopaybank_gateway/order_status';
+    const XML_PATH_ORDER_STATUS = 'payment/cointopaycc_gateway/order_status';
 
     /**
     * API URL
@@ -193,7 +193,7 @@ class SalesOrderPlaceAfterObserver implements ObserverInterface
 		// // getting data from file
 		// $fileSystem = $objectManager->create('\Magento\Framework\Filesystem');
 		// $mediaPath=$fileSystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath();
-		if ($payment_method_code == 'cointopaybank_gateway') {
+		if ($payment_method_code == 'cointopaycc_gateway') {
 			$additional_data = $order->getPayment()->getAdditionalInformation();
 			//throw new \Magento\Framework\Exception\LocalizedException(__(var_dump($additional_data)));
 			$this->coinId =  $additional_data['transaction_result'];
@@ -206,7 +206,7 @@ class SalesOrderPlaceAfterObserver implements ObserverInterface
 			$this->_coreSession->setCointopayresponse($response);
 			$objectManager = \Magento\Framework\App\ObjectManager::getInstance(); 
 			$customerSession = $objectManager->get('Magento\Customer\Model\Session');
-			$customerSession->setCoinBankresponse($response); //set value in customer session
+			$customerSession->setCoinresponse($response); //set value in customer session
 			$order->setExtOrderId($orderresponse['TransactionID']);
             $this->orderStatus = $this->scopeConfig->getValue(self::XML_PATH_ORDER_STATUS, $storeScope);
 			$order->setState($this->orderStatus)->setStatus($this->orderStatus);
@@ -221,8 +221,8 @@ class SalesOrderPlaceAfterObserver implements ObserverInterface
                 $rewrite = $this->urlFinder->findOneByData($filterData);
                 $urlRewriteModel = $this->_urlRewriteFactory->create();
                 $deleteItem->delete();
-                $customerSession->setCoinBankStoreId($rewrite->getStoreId()); 
-                $customerSession->setCoinBankTargetPath($rewrite->getTargetPath());                
+                $customerSession->setCoinStoreId($rewrite->getStoreId()); 
+                $customerSession->setCoinTargetPath($rewrite->getTargetPath());                
             }
 		}
     }
@@ -240,7 +240,7 @@ class SalesOrderPlaceAfterObserver implements ObserverInterface
         $this->merchantKey = $this->scopeConfig->getValue(self::XML_PATH_MERCHANT_KEY, $storeScope);
         $this->securityKey = $this->scopeConfig->getValue(self::XML_PATH_MERCHANT_SECURITY, $storeScope);
         $this->currencyCode = $this->_storeManager->getStore()->getCurrentCurrency()->getCode();
-        $this->_curlUrl = 'https://cointopay.com/MerchantAPI?Checkout=true&MerchantID='.$this->merchantId.'&Amount='.$this->orderTotal.'&AltCoinID='.$this->coinId.'&CustomerReferenceNr='.$orderId.'&SecurityCode='.$this->securityKey.'&output=json&inputCurrency='.$this->currencyCode.'&transactionconfirmurl='.$baseUrl.'paymentcointopaybank/order/&transactionfailurl='.$baseUrl.'paymentcointopaybank/order/';
+        $this->_curlUrl = 'https://cointopay.com/MerchantAPI?Checkout=true&MerchantID='.$this->merchantId.'&Amount='.$this->orderTotal.'&AltCoinID='.$this->coinId.'&CustomerReferenceNr='.$orderId.'&SecurityCode='.$this->securityKey.'&output=json&inputCurrency='.$this->currencyCode.'&transactionconfirmurl='.$baseUrl.'paymentcointopaycc/order/&transactionfailurl='.$baseUrl.'paymentcointopaycc/order/';
         $this->_curl->get($this->_curlUrl);
         $response = $this->_curl->getBody();
         return $response;

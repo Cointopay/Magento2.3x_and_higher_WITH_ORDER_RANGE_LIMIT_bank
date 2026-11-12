@@ -3,7 +3,7 @@
  * Copyright © 2018 Cointopay. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace CointopayBank\PaymentGateway\Block;
+namespace CointopayCC\PaymentGateway\Block;
 
 class Thankyou extends \Magento\Sales\Block\Order\Totals
 {
@@ -55,12 +55,12 @@ class Thankyou extends \Magento\Sales\Block\Order\Totals
     /**
     * Merchant COINTOPAY API Key
     */
-    const XML_PATH_MERCHANT_KEY = 'payment/cointopaybank_gateway/bank_merchant_gateway_api_key';
+    const XML_PATH_MERCHANT_KEY = 'payment/cointopaycc_gateway/cc_merchant_gateway_api_key';
 	
 	/**
     * Merchant ID
     */
-    const XML_PATH_MERCHANT_ID = 'payment/cointopaybank_gateway/bank_merchant_gateway_id';
+    const XML_PATH_MERCHANT_ID = 'payment/cointopaycc_gateway/cc_merchant_gateway_id';
 
     /**
     * @var $response
@@ -136,9 +136,9 @@ class Thankyou extends \Magento\Sales\Block\Order\Totals
 		}*/
 		
 		$customerSession = $objectManager->get('Magento\Customer\Model\Session');
-        $cointopay_response = $customerSession->getCoinBankresponse();
+        $cointopay_response = $customerSession->getCoinresponse();
         if (isset($cointopay_response)) {
-            $customerSession->unsCoinBankresponse();
+            $customerSession->unsCoinresponse();
             return json_decode($cointopay_response);
         }
 		return false;
@@ -152,7 +152,7 @@ class Thankyou extends \Magento\Sales\Block\Order\Totals
      */
     public function getCoinsPaymentUrl()
     {
-        return $this->getUrl("paymentcointopaybank");
+        return $this->getUrl("paymentcointopaycc");
     }
 	
 	/**
@@ -178,9 +178,9 @@ class Thankyou extends \Magento\Sales\Block\Order\Totals
 		}*/
 		
 		$customerSession = $objectManager->get('Magento\Customer\Model\Session');
-        $cointopay_response = $customerSession->getCoinBankresponse();
+        $cointopay_response = $customerSession->getCoinresponse();
         if (isset($cointopay_response)) {
-            $customerSession->unsCoinBankresponse();
+            $customerSession->unsCoinresponse();
             return json_decode($cointopay_response);
         }
 		return false;

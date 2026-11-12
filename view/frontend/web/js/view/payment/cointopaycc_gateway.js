@@ -17,10 +17,10 @@ define(
     ) {
         'use strict';
         $(function() {
-            $(document).on('change', ".cointopaybank_coin_val", function () {
+            $(document).on('change', ".cointopaycc_coin_val", function () {
                 var coinVal = $(this).val();
                     $.ajax ({
-                        url: '/paymentcointopaybank/coin/',
+                        url: '/paymentcointopaycc/coin/',
                         showLoader: true,
                         data: {coinId:coinVal, type:'security'},
                         type: "POST",
@@ -32,8 +32,8 @@ define(
             });
         rendererList.push(
             {
-                type: 'cointopaybank_gateway',
-                component: 'CointopayBank_PaymentGateway/js/view/payment/method-renderer/cointopaybank_gateway'
+                type: 'cointopaycc_gateway',
+                component: 'CointopayCC_PaymentGateway/js/view/payment/method-renderer/cointopaycc_gateway'
             }
         );
         /** Add view logic here if needed */

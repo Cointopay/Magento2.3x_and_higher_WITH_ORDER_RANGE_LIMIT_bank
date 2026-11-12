@@ -3,12 +3,12 @@
  * Copyright © 2018 Cointopay. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace CointopayBank\PaymentGateway\Test\Unit\Block;
+namespace CointopayCC\PaymentGateway\Test\Unit\Block;
 
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Payment\Gateway\ConfigInterface;
 use Magento\Payment\Model\InfoInterface;
-use CointopayBank\PaymentGateway\Block\Info;
+use CointopayCC\PaymentGateway\Block\Info;
 
 class InfoTest extends \PHPUnit_Framework_TestCase
 {

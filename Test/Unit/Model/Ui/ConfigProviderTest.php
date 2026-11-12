@@ -3,10 +3,10 @@
  * Copyright © 2018 Cointopay. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace CointopayBank\PaymentGateway\Test\Unit\Model\Ui;
+namespace CointopayCC\PaymentGateway\Test\Unit\Model\Ui;
 
-use CointopayBank\PaymentGateway\Gateway\Http\Client\ClientMock;
-use CointopayBank\PaymentGateway\Model\Ui\ConfigProvider;
+use CointopayCC\PaymentGateway\Gateway\Http\Client\ClientMock;
+use CointopayCC\PaymentGateway\Model\Ui\ConfigProvider;
 
 class ConfigProviderTest extends \PHPUnit_Framework_TestCase
 {

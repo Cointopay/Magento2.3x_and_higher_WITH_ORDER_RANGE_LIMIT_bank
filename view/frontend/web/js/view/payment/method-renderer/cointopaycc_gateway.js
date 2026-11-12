@@ -14,7 +14,7 @@ define(
 
         return Component.extend({
             defaults: {
-                template: 'CointopayBank_PaymentGateway/payment/form',
+                template: 'CointopayCC_PaymentGateway/payment/form',
                 transactionResult: ''
             },
 
@@ -28,7 +28,7 @@ define(
             },
 
             getCode: function() {
-                return 'cointopaybank_gateway';
+                return 'cointopaycc_gateway';
             },
 
             getData: function() {
@@ -41,7 +41,7 @@ define(
             },
 
             getTransactionResults: function() {
-                return _.map(window.checkoutConfig.payment.cointopaybank_gateway.transactionResults, function(value, key) {
+                return _.map(window.checkoutConfig.payment.cointopaycc_gateway.transactionResults, function(value, key) {
                     return {
                         'value': key,
                         'transaction_result': value

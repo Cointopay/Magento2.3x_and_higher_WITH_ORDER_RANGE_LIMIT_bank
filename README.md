@@ -1,4 +1,4 @@
-## Official Cointopay Bank Magento 2.x plugin
+## Official Cointopay CC Magento 2.x plugin
 
 Please follow the Magento install instructions mentioned here: <a href="https://docs.google.com/document/d/1hwf0kMoCFeNQWJGxyRnj7sspiUVtaFHkJ7cMj8hRJx0/edit?usp=sharing" target="_new">download magento documentation</a> or direct link: https://docs.google.com/document/d/1hwf0kMoCFeNQWJGxyRnj7sspiUVtaFHkJ7cMj8hRJx0/edit?usp=sharing
 
@@ -18,7 +18,7 @@ Please follow the Magento install instructions mentioned here: <a href="https://
 
 Once installed, this module can be configured in the usual way by logging into the Magento admin area and navigating to:
 
-Stores > Configuration > Sales > Payment Methods > Cointopay Bank International
+Stores > Configuration > Sales > Payment Methods > Cointopay CC International
 
 
 ### Support or Contact

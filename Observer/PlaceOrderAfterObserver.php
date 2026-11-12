@@ -3,7 +3,7 @@
  * Copyright © 2018 Cointopay. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace CointopayBank\PaymentGateway\Observer;
+namespace CointopayCC\PaymentGateway\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
 

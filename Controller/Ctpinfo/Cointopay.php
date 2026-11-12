@@ -4,7 +4,7 @@
 * See COPYING.txt for license details.
 */
 
-namespace CointopayBank\PaymentGateway\Controller\Ctpinfo;
+namespace CointopayCC\PaymentGateway\Controller\Ctpinfo;
 
 use Magento\Framework\App\ResponseInterface;
 
@@ -76,17 +76,17 @@ class Cointopay extends \Magento\Framework\App\Action\Action
     /**
     * Merchant ID
     */
-    const XML_PATH_MERCHANT_ID = 'payment/cointopaybank_gateway/bank_merchant_gateway_id';
+    const XML_PATH_MERCHANT_ID = 'payment/cointopaycc_gateway/cc_merchant_gateway_id';
 
     /**
     * Merchant COINTOPAY API Key
     */
-    const XML_PATH_MERCHANT_KEY = 'payment/cointopaybank_gateway/bank_merchant_gateway_api_key';
+    const XML_PATH_MERCHANT_KEY = 'payment/cointopaycc_gateway/cc_merchant_gateway_api_key';
 
     /**
     * Merchant COINTOPAY SECURITY Key
     */
-    const XML_PATH_MERCHANT_SECURITY = 'payment/cointopaybank_gateway/bank_merchant_gateway_security';
+    const XML_PATH_MERCHANT_SECURITY = 'payment/cointopaycc_gateway/cc_merchant_gateway_security';
 
     /**
     * API URL
@@ -156,14 +156,14 @@ class Cointopay extends \Magento\Framework\App\Action\Action
 						$params = array('_secure' => $this->_requestRepo->isSecure());
 						$getUrl = $objectManager->get('\Magento\Framework\View\Element\Template');
 					
-						$this->_resultOutput .= '<div class="popup-overlay cointopaybank active">
-						<div class="popup-content cointopaybank active">    
-							<img src="'.$this->_assetRepo->getUrlWithParams('CointopayBank_PaymentGateway::images/cointopay.gif', $params).'" />
+						$this->_resultOutput .= '<div class="popup-overlay cointopaycc active">
+						<div class="popup-content cointopaycc active">    
+							<img src="'.$this->_assetRepo->getUrlWithParams('CointopayCC_PaymentGateway::images/cointopay.gif', $params).'" />
 							<p class="description" style="text-align:center !important;"><strong>Please make the payment and wait for the success confirmation page.</strong></p>
 							<h1> PAYMENT DETAILS </h1>
 							<div class="cointopay_details_main">
 							<div class="cointopay_details">
-								<p class="time"><strong>Expiry: </strong> <span id="ctpbank_expire_time">'. date("m/d/Y h:i:s T",strtotime("+".$response->ExpiryTime." minutes")) .'</span></p>
+								<p class="time"><strong>Expiry: </strong> <span id="ctpcc_expire_time">'. date("m/d/Y h:i:s T",strtotime("+".$response->ExpiryTime." minutes")) .'</span></p>
 								<p class="trxid"><strong>Transaction ID: </strong> '. $response->TransactionID .'</p>
 								<p class="description">';
 								if ($response->PaymentDetail != null || $response->PaymentDetail != '') {
@@ -175,7 +175,7 @@ class Cointopay extends \Magento\Framework\App\Action\Action
 								<p class="description">Make sure to send enough to cover  any coin transaction fees!</p>
 								<p class="description">Send an equal amount or more.</p>
 								 <p class="description"> <a target="_blank" href="'.  $response->RedirectURL .'">View Invoice details</a></p>
-								<input type="hidden" id="cointopaybank_trid" value="'. $response->TransactionID .'" >
+								<input type="hidden" id="cointopaycc_trid" value="'. $response->TransactionID .'" >
 							</div>
 							</div>
 						</div>
@@ -186,21 +186,21 @@ class Cointopay extends \Magento\Framework\App\Action\Action
 								function($) {
 									$(function() {
 										interval = setInterval(function() {
-											if ($("#cointopaybank_trid").length) {
-												selected_coin = $("#cointopaybank_trid").val();
+											if ($("#cointopaycc_trid").length) {
+												selected_coin = $("#cointopaycc_trid").val();
 												$.ajax ({
-													url: "'.$getUrl->getUrl("paymentcointopaybank") .'",
+													url: "'.$getUrl->getUrl("paymentcointopaycc") .'",
 													//showLoader: true,
 													data: {paymentaction:selected_coin, type:\'status\'},
 													type: "POST",
 													success: function(result) {
 														if (result.status == \'paid\') {
-															$(\'.popup-content.cointopaybank\').html(\'<h3>Thank you, your payment is received!</h3><p class="description"> <a target="_blank" href="'. $response->RedirectURL .'">View Invoice details</a></p>\');
+															$(\'.popup-content.cointopaycc\').html(\'<h3>Thank you, your payment is received!</h3><p class="description"> <a target="_blank" href="'. $response->RedirectURL .'">View Invoice details</a></p>\');
 														} else if (result.status == \'expired\') {
-															$(\'.popup-content.cointopaybank\').html(\'<h3>Payment time expired!</h3><p class="description"> <a target="_blank" href="'.  $response->RedirectURL .'">View Invoice details</a></p>\');
+															$(\'.popup-content.cointopaycc\').html(\'<h3>Payment time expired!</h3><p class="description"> <a target="_blank" href="'.  $response->RedirectURL .'">View Invoice details</a></p>\');
 														}
 														 else if (result.status == \'underpaid\') {
-															$(\'.popup-content.cointopaybank\').html(\'<h3>You have underpaid, please pay the remaining amount or contact support!</h3><p class="description"> <a target="_blank" href="'.  $response->RedirectURL .'">View Invoice details</a></p>\');
+															$(\'.popup-content.cointopaycc\').html(\'<h3>You have underpaid, please pay the remaining amount or contact support!</h3><p class="description"> <a target="_blank" href="'.  $response->RedirectURL .'">View Invoice details</a></p>\');
 														}
 													}
 												});
@@ -215,7 +215,7 @@ class Cointopay extends \Magento\Framework\App\Action\Action
 
 										// Update the count down every 1 second
 										var x = setInterval(function() {
-											if ($(\'#ctpbank_expire_time\').length) {
+											if ($(\'#ctpcc_expire_time\').length) {
 												// Get todays date and time
 												var now = new Date().getTime();
 												
@@ -229,25 +229,25 @@ class Cointopay extends \Magento\Framework\App\Action\Action
 												var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 												
 												// Output the result in an element with id="expire_time"
-												document.getElementById("ctpbank_expire_time").innerHTML = days + "d " + hours + "h "
+												document.getElementById("ctpcc_expire_time").innerHTML = days + "d " + hours + "h "
 												+ minutes + "m " + seconds + "s ";
 												
 												// If the count down is over, write some text 
 												if (distance < 0) {
 													clearInterval(x);
-													document.getElementById("ctpbank_expire_time").innerHTML = "EXPIRED";
+													document.getElementById("ctpcc_expire_time").innerHTML = "EXPIRED";
 												}
 											}
 										}, 1000);
 									});
 								});
 						</script>';
-						return $result_ctp->setData(["ctpbankData" => $this->_resultOutput]);
+						return $result_ctp->setData(["ctpccData" => $this->_resultOutput]);
 					} else {
-						return $result_ctp->setData(["ctpbankData" => $result->message]);
+						return $result_ctp->setData(["ctpccData" => $result->message]);
 					}
 				} else {
-					return $result_ctp->setData(["ctpbankData" => "No Cointopay bank data found due to empty session values"]);
+					return $result_ctp->setData(["ctpccData" => "No Cointopay bank data found due to empty session values"]);
 				}
 				 
 			}

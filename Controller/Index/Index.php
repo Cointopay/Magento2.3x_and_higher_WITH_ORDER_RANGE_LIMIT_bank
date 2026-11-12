@@ -1,14 +1,15 @@
 <?php
-/**
-* Copyright © 2018 Cointopay. All rights reserved.
-* See COPYING.txt for license details.
-*/
 
-namespace CointopayBank\PaymentGateway\Controller\Index;
+/**
+ * Copyright © 2018 Cointopay. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+namespace CointopayCC\PaymentGateway\Controller\Index;
 
 use Magento\Sales\Model\Order;
-use Magento\Sales\Model\Order\Email\Sender\InvoiceSender;
 use Magento\Framework\App\ResponseInterface;
+use Magento\Sales\Model\Order\Email\Sender\InvoiceSender;
 
 
 class Index extends \Magento\Framework\App\Action\Action
@@ -21,105 +22,105 @@ class Index extends \Magento\Framework\App\Action\Action
     protected $_objectManager;
     protected $_checkoutSession;
     protected $_orderFactory;
-	
-	/**
-	* @var \Magento\Sales\Model\Order\Email\Sender\InvoiceSender
-	*/
+
+    /**
+     * @var \Magento\Sales\Model\Order\Email\Sender\InvoiceSender
+     */
     protected $invoiceSender;
 
     /**
-   * @var \Magento\Framework\App\Config\ScopeConfigInterface
-   */
-   protected $scopeConfig;
+     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     */
+    protected $scopeConfig;
 
     /**
-    * @var \Magento\Framework\HTTP\Client\Curl
-    */
+     * @var \Magento\Framework\HTTP\Client\Curl
+     */
     protected $_curl;
 
     /**
-    * @var $merchantId
-    **/
+     * @var $merchantId
+     **/
     protected $merchantId;
 
     /**
-    * @var $merchantKey
-    **/
+     * @var $merchantKey
+     **/
     protected $merchantKey;
 
     /**
-    * @var $coinId
-    **/
+     * @var $coinId
+     **/
     protected $coinId;
 
     /**
-    * @var $type
-    **/
+     * @var $type
+     **/
     protected $type;
 
     /**
-    * @var $orderTotal
-    **/
+     * @var $orderTotal
+     **/
     protected $orderTotal;
 
     /**
-    * @var $_curlUrl
-    **/
+     * @var $_curlUrl
+     **/
     protected $_curlUrl;
 
     /**
-    * @var currencyCode
-    **/
+     * @var currencyCode
+     **/
     protected $currencyCode;
 
     /**
-    * @var $_storeManager
-    **/
+     * @var $_storeManager
+     **/
     protected $_storeManager;
-    
+
     /**
-    * @var $securityKey
-    **/
+     * @var $securityKey
+     **/
     protected $securityKey;
-	
-	/**
-    * @var $paidStatus
-    **/
+
+    /**
+     * @var $paidStatus
+     **/
     protected $paidStatus;
 
     /**
-    * Merchant ID
-    */
-    const XML_PATH_MERCHANT_ID = 'payment/cointopaybank_gateway/bank_merchant_gateway_id';
+     * Merchant ID
+     */
+    const XML_PATH_MERCHANT_ID = 'payment/cointopaycc_gateway/cc_merchant_gateway_id';
 
     /**
-    * Merchant COINTOPAY API Key
-    */
-    const XML_PATH_MERCHANT_KEY = 'payment/cointopaybank_gateway/bank_merchant_gateway_key';
+     * Merchant COINTOPAY API Key
+     */
+    const XML_PATH_MERCHANT_KEY = 'payment/cointopaycc_gateway/cc_merchant_gateway_key';
 
     /**
-    * Merchant COINTOPAY SECURITY Key
-    */
-    const XML_PATH_MERCHANT_SECURITY = 'payment/cointopaybank_gateway/bank_merchant_gateway_security';
-	
-	/**
-    * Merchant COINTOPAY SECURITY Key
-    */
-    const XML_PATH_PAID_ORDER_STATUS = 'payment/cointopaybank_gateway/bank_order_status_paid';
+     * Merchant COINTOPAY SECURITY Key
+     */
+    const XML_PATH_MERCHANT_SECURITY = 'payment/cointopaycc_gateway/cc_merchant_gateway_security';
 
     /**
-    * API URL
-    **/
+     * Merchant COINTOPAY SECURITY Key
+     */
+    const XML_PATH_PAID_ORDER_STATUS = 'payment/cointopaycc_gateway/cc_order_status_paid';
+
+    /**
+     * API URL
+     **/
     const COIN_TO_PAY_API = 'https://cointopay.com/MerchantAPI';
 
     /**
-    * @var $response
-    **/
-    protected $response = [] ;
+     * @var $response
+     **/
+    protected $response = [];
 
     /**
-    * @var \Magento\Framework\Registry
-    */
+     * @var \Magento\Framework\Registry
+     */
     protected $_registry;
 
     /*
@@ -133,7 +134,7 @@ class Index extends \Magento\Framework\App\Action\Action
     * @param \Magento\Framework\Registry $registry
 	* @param \Magento\Sales\Model\Order\Email\Sender\InvoiceSender $invoiceSender
     */
-    public function __construct (
+    public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\Json\EncoderInterface $encoder,
         \Magento\Framework\HTTP\Client\Curl $curl,
@@ -146,7 +147,7 @@ class Index extends \Magento\Framework\App\Action\Action
         \Magento\Checkout\Model\Session $checkoutSession,
         \Magento\Sales\Model\OrderFactory $orderFactory,
         \Magento\Framework\Registry $registry,
-		\Magento\Sales\Model\Order\Email\Sender\InvoiceSender $invoiceSender
+        \Magento\Sales\Model\Order\Email\Sender\InvoiceSender $invoiceSender
     ) {
         $this->_context = $context;
         $this->_jsonEncoder = $encoder;
@@ -160,19 +161,19 @@ class Index extends \Magento\Framework\App\Action\Action
         $this->_checkoutSession = $checkoutSession;
         $this->_orderFactory = $orderFactory;
         $this->_registry = $registry;
-		$this->invoiceSender = $invoiceSender;
+        $this->invoiceSender = $invoiceSender;
         parent::__construct($context);
     }
 
     public function execute()
     {
-		
+
         if ($this->getRequest()->isXmlHttpRequest()) {
             $storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
             $this->coinId = $this->getRequest()->getParam('paymentaction');
             $this->merchantId = $this->scopeConfig->getValue(self::XML_PATH_MERCHANT_ID, $storeScope);
             $this->securityKey = $this->scopeConfig->getValue(self::XML_PATH_MERCHANT_SECURITY, $storeScope);
-			$this->paidStatus = $this->scopeConfig->getValue(self::XML_PATH_PAID_ORDER_STATUS, $storeScope);
+            $this->paidStatus = $this->scopeConfig->getValue(self::XML_PATH_PAID_ORDER_STATUS, $storeScope);
             $type = $this->getRequest()->getParam('type');
             $this->currencyCode = $this->_storeManager->getStore()->getCurrentCurrency()->getCode();
             if ($type == 'status') {
@@ -180,31 +181,31 @@ class Index extends \Magento\Framework\App\Action\Action
                 if ($response == 'paid') {
                     $orderId = $this->getRealOrderId();
                     $order = $this->_objectManager->create('\Magento\Sales\Model\Order')->load($orderId);
-					if ($order->canInvoice()) {
-						$invoice = $order->prepareInvoice();
-						$invoice->getOrder()->setIsInProcess(true);
-						$invoice->register()->pay();
-						$invoice->save();
-					}
+                    if ($order->canInvoice()) {
+                        $invoice = $order->prepareInvoice();
+                        $invoice->getOrder()->setIsInProcess(true);
+                        $invoice->register()->pay();
+                        $invoice->save();
+                    }
                     $order->setState($this->paidStatus)->setStatus($this->paidStatus);
                     $order->save();
-					if (isset($invoice)) {
-					   $this->invoiceSender->send($invoice);
-					}
+                    if (isset($invoice)) {
+                        $this->invoiceSender->send($invoice);
+                    }
                 }
                 /** @var \Magento\Framework\Controller\Result\Json $result */
                 $result = $this->resultJsonFactory->create();
                 return $result->setData(['status' => $response]);
             } else {
                 $this->_coreSession->start();
-                $this->_coreSession->setCoinBankid($this->coinId);
+                $this->_coreSession->setCoinid($this->coinId);
                 $isVerified = $this->verifyOrder();
                 /** @var \Magento\Framework\Controller\Result\Json $result */
                 $result = $this->resultJsonFactory->create();
                 if ($isVerified == 'success') {
                     return $result->setData(['status' => 'success', 'coindid' => $this->coinId]);
                 } else {
-                    return $result->setData(['status' => 'error' , 'message' => $isVerified]);
+                    return $result->setData(['status' => 'error', 'message' => $isVerified]);
                 }
             }
         }
@@ -212,11 +213,12 @@ class Index extends \Magento\Framework\App\Action\Action
     }
 
     /**
-    * @return json response
-    **/
-    private function payOrder() {
+     * @return json response
+     **/
+    private function payOrder()
+    {
         $this->orderTotal = $this->getCartAmount();
-        $this->_curlUrl = 'https://cointopay.com/MerchantAPI?Checkout=true&MerchantID='.$this->merchantId.'&Amount='.$this->orderTotal.'&AltCoinID='.$this->coinId.'&CustomerReferenceNr=buy%20something%20from%20me&SecurityCode='.$this->securityKey.'&output=json&inputCurrency='.$this->currencyCode;
+        $this->_curlUrl = 'https://cointopay.com/MerchantAPI?Checkout=true&MerchantID=' . $this->merchantId . '&Amount=' . $this->orderTotal . '&AltCoinID=' . $this->coinId . '&CustomerReferenceNr=buy%20something%20from%20me&SecurityCode=' . $this->securityKey . '&output=json&inputCurrency=' . $this->currencyCode;
         $this->_curl->get($this->_curlUrl);
         $response = $this->_curl->getBody();
         /** @var \Magento\Framework\Controller\Result\Json $result */
@@ -225,22 +227,24 @@ class Index extends \Magento\Framework\App\Action\Action
     }
 
     /**
-    * @return Total order amount from cart
-    **/
-    private function getCartAmount () {
-        
+     * @return Total order amount from cart
+     **/
+    private function getCartAmount()
+    {
+
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $cart = $objectManager->get('\Magento\Checkout\Model\Cart');   
+        $cart = $objectManager->get('\Magento\Checkout\Model\Cart');
         return $cart->getQuote()->getGrandTotal();
     }
 
     /**
-    * @return string payment status
-    **/
-    private function getStatus ($TransactionID) {
+     * @return string payment status
+     **/
+    private function getStatus($TransactionID)
+    {
         $storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
         $this->merchantId = $this->scopeConfig->getValue(self::XML_PATH_MERCHANT_ID, $storeScope);
-        $this->_curlUrl = 'https://cointopay.com/CloneMasterTransaction?MerchantID='.$this->merchantId.'&TransactionID='.$TransactionID.'&output=json';
+        $this->_curlUrl = 'https://cointopay.com/CloneMasterTransaction?MerchantID=' . $this->merchantId . '&TransactionID=' . $TransactionID . '&output=json';
         $this->_curl->get($this->_curlUrl);
         $response = $this->_curl->getBody();
         $decoded = json_decode($response);
@@ -248,9 +252,14 @@ class Index extends \Magento\Framework\App\Action\Action
     }
 
     // verify that if order can be placed or not
-    private function verifyOrder () {
+    private function verifyOrder()
+    {
         $this->orderTotal = $this->getCartAmount();
-        $this->_curlUrl = 'https://cointopay.com/MerchantAPI?Checkout=true&MerchantID='.$this->merchantId.'&Amount='.$this->orderTotal.'&AltCoinID='.$this->coinId.'&CustomerReferenceNr=buy%20something%20from%20me&SecurityCode='.$this->securityKey.'&output=json&inputCurrency='.$this->currencyCode.'&testcheckout';
+        $total = $this->orderTotal;
+        if (empty($total) || $total == 0) {
+            $total = 10;
+        }
+        $this->_curlUrl = 'https://cointopay.com/MerchantAPI?Checkout=true&MerchantID=' . $this->merchantId . '&Amount=' . $total . '&AltCoinID=' . $this->coinId . '&CustomerReferenceNr=buy%20something%20from%20me&SecurityCode=' . $this->securityKey . '&output=json&inputCurrency=' . $this->currencyCode . '&testcheckout';
         $this->_curl->get($this->_curlUrl);
         $response = $this->_curl->getBody();
         if ($response == '"testcheckout success"') {

@@ -6,6 +6,6 @@
 
 \Magento\Framework\Component\ComponentRegistrar::register(
     \Magento\Framework\Component\ComponentRegistrar::MODULE,
-    'CointopayBank_PaymentGateway',
+    'CointopayCC_PaymentGateway',
     __DIR__
 );

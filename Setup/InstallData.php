@@ -3,7 +3,7 @@
  * Copyright © 2018 Cointopay. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace CointopayBank\PaymentGateway\Setup;
+namespace CointopayCC\PaymentGateway\Setup;
 
 use Magento\Customer\Model\Customer;
 use Magento\Framework\Encryption\Encryptor;
@@ -78,7 +78,7 @@ class InstallData implements InstallDataInterface
         /**
          * Remove previous attributes
          */
-        $attributes =       ['cointopaybank_reference'];
+        $attributes =       ['cointopaycc_reference'];
         foreach ($attributes as $attr_to_remove){
             $salesSetup->removeAttribute(\Magento\Sales\Model\Order::ENTITY,$attr_to_remove);
 
@@ -90,7 +90,7 @@ class InstallData implements InstallDataInterface
          * Add 'cointopay_reference' attributes for order
          */
         $options = ['type' => 'varchar', 'visible' => false, 'required' => false];
-        $salesSetup->addAttribute('order', 'cointopaybank_reference', $options);
+        $salesSetup->addAttribute('order', 'cointopaycc_reference', $options);
 
     }
 }

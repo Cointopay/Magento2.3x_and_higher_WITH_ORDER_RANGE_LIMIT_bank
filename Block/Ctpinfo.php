@@ -1,5 +1,5 @@
 <?php
-namespace CointopayBank\PaymentGateway\Block;
+namespace CointopayCC\PaymentGateway\Block;
 
 use Magento\Cms\Api\BlockRepositoryInterface;
 use Magento\Cms\Api\Data\BlockInterface;
@@ -72,12 +72,12 @@ class CtpInfo extends Template
     /**
     * Merchant COINTOPAY API Key
     */
-    const XML_PATH_MERCHANT_KEY = 'payment/cointopaybank_gateway/bank_merchant_gateway_api_key';
+    const XML_PATH_MERCHANT_KEY = 'payment/cointopaycc_gateway/cc_merchant_gateway_api_key';
 	
 	/**
     * Merchant ID
     */
-    const XML_PATH_MERCHANT_ID = 'payment/cointopaybank_gateway/bank_merchant_gateway_id';
+    const XML_PATH_MERCHANT_ID = 'payment/cointopaycc_gateway/cc_merchant_gateway_id';
 
     /**
     * @var $response
@@ -123,7 +123,7 @@ class CtpInfo extends Template
 			["sop" => "sales_order_payment"],
 			'main_table.entity_id = sop.parent_id',
 			array('method')
-		)->where('sop.method = ?','cointopaybank_gateway');
+		)->where('sop.method = ?','cointopaycc_gateway');
 		
 		$orderCollection->setOrder('entity_id','DESC');
         $orderCollection->setPageSize($pageSize);
@@ -147,7 +147,7 @@ class CtpInfo extends Template
 		$storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
 		$orderObj = $this->getOrder();
 		$payment_method_code = $orderObj->getPayment()->getMethodInstance()->getCode();
-		if ($payment_method_code == 'cointopaybank_gateway') {
+		if ($payment_method_code == 'cointopaycc_gateway') {
 			if(null !== $orderObj->getExtOrderId()){
 				$this->transactionId = $orderObj->getExtOrderId();
 				$this->merchantId = $this->scopeConfig->getValue(self::XML_PATH_MERCHANT_ID, $storeScope);
@@ -169,7 +169,7 @@ class CtpInfo extends Template
      */
     public function getCoinsPaymentUrl()
     {
-        return $this->getUrl("paymentcointopaybank");
+        return $this->getUrl("paymentcointopaycc");
     }
 	
 	/**
@@ -205,7 +205,7 @@ class CtpInfo extends Template
 		if ($this->getOrder()) {
 			$pager = $this->getLayout()->createBlock(
 				'Magento\Theme\Block\Html\Pager',
-				'cointopaybank.order.pager'
+				'cointopaycc.order.pager'
 			)->setAvailableLimit(array(5=>5,10=>10,15=>15))->setShowPerPage(true)->setCollection(
 				$this->getOrder()
 			);

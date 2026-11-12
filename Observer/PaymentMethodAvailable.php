@@ -3,7 +3,7 @@
  * Copyright © 2018 Cointopay. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace CointopayBank\PaymentGateway\Observer;
+namespace CointopayCC\PaymentGateway\Observer;
 
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
@@ -31,12 +31,12 @@ class PaymentMethodAvailable implements ObserverInterface
      /**
     * COINTOPAY MIN AMOUNT
     */
-    const XML_PATH_MIN_AMOUNT = 'payment/cointopaybank_gateway/bank_cointopay_min_amount';
+    const XML_PATH_MIN_AMOUNT = 'payment/cointopaycc_gateway/cc_cointopay_min_amount';
 	
      /**
     * COINTOPAY MAN AMOUNT
     */
-    const XML_PATH_MAX_AMOUNT = 'payment/cointopaybank_gateway/bank_cointopay_max_amount';
+    const XML_PATH_MAX_AMOUNT = 'payment/cointopaycc_gateway/cc_cointopay_max_amount';
 	
 	/*
     * @param \Magento\Framework\App\Config\ScopeConfigInterface    $scopeConfig
@@ -55,7 +55,7 @@ class PaymentMethodAvailable implements ObserverInterface
     {
         $method = $observer->getEvent()->getMethodInstance()->getCode();
         
-        if ($method == 'cointopaybank_gateway') {
+        if ($method == 'cointopaycc_gateway') {
             
 			$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 			$cart = $objectManager->get('Magento\Checkout\Model\Cart');

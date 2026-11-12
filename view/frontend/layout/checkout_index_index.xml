@@ -7,7 +7,7 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <referenceContainer name="header.container">
-        <block class="CointopayBank\PaymentGateway\Block\Config" template="CointopayBank_PaymentGateway::js.phtml"/>
+        <block class="CointopayCC\PaymentGateway\Block\Config" template="CointopayCC_PaymentGateway::js.phtml"/>
     </referenceContainer>
     <body>
         <referenceBlock name="checkout.root">
@@ -26,10 +26,10 @@
                                                         <item name="renders" xsi:type="array">
                                                             <!-- merge payment method renders here -->
                                                             <item name="children" xsi:type="array">
-                                                                <item name="cointopaybank_gateway" xsi:type="array">
-                                                                    <item name="component" xsi:type="string">CointopayBank_PaymentGateway/js/view/payment/cointopaybank_gateway</item>
+                                                                <item name="cointopaycc_gateway" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">CointopayCC_PaymentGateway/js/view/payment/cointopaycc_gateway</item>
                                                                     <item name="methods" xsi:type="array">
-                                                                        <item name="cointopaybank_gateway" xsi:type="array">
+                                                                        <item name="cointopaycc_gateway" xsi:type="array">
                                                                             <item name="isBillingAddressRequired" xsi:type="boolean">true</item>
                                                                         </item>
                                                                     </item>

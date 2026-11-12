@@ -1,8 +1,8 @@
 {
-    "name": "cointopaybank/paymentgateway",
+    "name": "cointopaycc/paymentgateway",
     "description": "Crypto currency payments",
 	"type": "magento2-module",
-	"version": "100.1.0",
+	"version": "100.2.5",
 	"license": [
         "OSL-3.0",
         "GPL-3.0"
@@ -14,7 +14,7 @@
 	},
     "authors": [
         {
-            "name": "Cointopay Bank International B.V.",
+            "name": "Cointopay CC International B.V.",
             "email": "support@cointopay.com",
             "role": "Developer"
         }
@@ -24,7 +24,7 @@
     "autoload": {
         "files": [ "registration.php" ],
         "psr-4": {
-            "CointopayBank\\PaymentGateway\\": ""
+            "CointopayCC\\PaymentGateway\\": ""
         }
     }
 }

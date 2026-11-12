@@ -3,11 +3,11 @@
  * Copyright © 2018 Cointopay. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace CointopayBank\PaymentGateway\Block;
+namespace CointopayCC\PaymentGateway\Block;
 
 use Magento\Framework\Phrase;
 use Magento\Payment\Block\ConfigurableInfo;
-use CointopayBank\PaymentGateway\Gateway\Response\FraudHandler;
+use CointopayCC\PaymentGateway\Gateway\Response\FraudHandler;
 
 class Config extends ConfigurableInfo
 {
@@ -29,7 +29,7 @@ class Config extends ConfigurableInfo
      */
     public function getAjaxUrl()
     {
-        return $this->getUrl("cointopaybankcoins");
+        return $this->getUrl("cointopaycccoins");
     }
 
     /**
@@ -39,7 +39,7 @@ class Config extends ConfigurableInfo
      */
     public function getCoinsPaymentUrl()
     {
-        return $this->getUrl("paymentcointopaybank");
+        return $this->getUrl("paymentcointopaycc");
     }
 
     /**
@@ -47,11 +47,11 @@ class Config extends ConfigurableInfo
      *
      * @return string | Status
      */
-    public function cointopaybankReference ($status) {
+    public function cointopayccReference ($status) {
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); 
         $customerSession = $objectManager->get('Magento\Customer\Model\Session');
         if (isset($customerSession) && isset($status)) {
-            return json_encode('cointopaybank_ref');
+            return json_encode('cointopaycc_ref');
         }
         return false;
     }

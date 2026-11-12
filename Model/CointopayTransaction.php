@@ -1,5 +1,5 @@
 <?php 
-namespace CointopayBank\PaymentGateway\Model;
+namespace CointopayCC\PaymentGateway\Model;
  
  
 class CointopayTransaction{
@@ -82,22 +82,22 @@ class CointopayTransaction{
     /**
     * Merchant ID
     */
-    const XML_PATH_MERCHANT_ID = 'payment/cointopaybank_gateway/bank_merchant_gateway_id';
+    const XML_PATH_MERCHANT_ID = 'payment/cointopaycc_gateway/cc_merchant_gateway_id';
 
     /**
     * Merchant COINTOPAY API Key
     */
-    const XML_PATH_MERCHANT_KEY = 'payment/cointopaybank_gateway/bank_merchant_gateway_api_key';
+    const XML_PATH_MERCHANT_KEY = 'payment/cointopaycc_gateway/cc_merchant_gateway_api_key';
 
     /**
     * Merchant COINTOPAY SECURITY Key
     */
-    const XML_PATH_MERCHANT_SECURITY = 'payment/cointopaybank_gateway/bank_merchant_gateway_security';
+    const XML_PATH_MERCHANT_SECURITY = 'payment/cointopaycc_gateway/cc_merchant_gateway_security';
 	
 	/**
     * Merchant COINTOPAY SECURITY Key
     */
-    const XML_PATH_PAID_ORDER_STATUS = 'payment/cointopaybank_gateway/bank_order_status_paid';
+    const XML_PATH_PAID_ORDER_STATUS = 'payment/cointopaycc_gateway/cc_order_status_paid';
 
     /**
     * API URL

@@ -3,7 +3,7 @@
  * Copyright © 2018 Cointopay. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace CointopayBank\PaymentGateway\Model\Adminhtml\Source;
+namespace CointopayCC\PaymentGateway\Model\Adminhtml\Source;
 use Magento\Payment\Model\Method\AbstractMethod;
 /**
  * Class SupportedCoin
@@ -48,7 +48,7 @@ class SupportedCoin implements \Magento\Framework\Option\ArrayInterface
     public function toOptionArray()
     {
         $storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
-        $this->merchantId = $this->scopeConfig->getValue('payment/cointopaybank_gateway/bank_merchant_gateway_id', $storeScope);
+        $this->merchantId = $this->scopeConfig->getValue('payment/cointopaycc_gateway/cc_merchant_gateway_id', $storeScope);
         if (isset($this->merchantId))
         {
             return $this->getSupportedCoins();

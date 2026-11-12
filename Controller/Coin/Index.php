@@ -4,7 +4,7 @@
 * See COPYING.txt for license details.
 */
 
-namespace CointopayBank\PaymentGateway\Controller\Coin;
+namespace CointopayCC\PaymentGateway\Controller\Coin;
 
 class Index extends \Magento\Framework\App\Action\Action
 {
@@ -71,17 +71,17 @@ class Index extends \Magento\Framework\App\Action\Action
     /**
     * Merchant ID
     */
-    const XML_PATH_MERCHANT_ID = 'payment/cointopaybank_gateway/bank_merchant_gateway_id';
+    const XML_PATH_MERCHANT_ID = 'payment/cointopaycc_gateway/cc_merchant_gateway_id';
 
     /**
     * Merchant COINTOPAY API Key
     */
-    const XML_PATH_MERCHANT_KEY = 'payment/cointopaybank_gateway/bank_merchant_gateway_key';
+    const XML_PATH_MERCHANT_KEY = 'payment/cointopaycc_gateway/cc_merchant_gateway_key';
 
     /**
     * Merchant COINTOPAY SECURITY Key
     */
-    const XML_PATH_MERCHANT_SECURITY = 'payment/cointopaybank_gateway/bank_merchant_gateway_security';
+    const XML_PATH_MERCHANT_SECURITY = 'payment/cointopaycc_gateway/cc_merchant_gateway_security';
 
     /**
     * API URL
@@ -135,7 +135,7 @@ class Index extends \Magento\Framework\App\Action\Action
     {
         $cCoinId = $this->getRequest()->getParam('coinId');
         $this->_coreSession->start();
-        $this->_coreSession->setCoinBankId($cCoinId);
+        $this->_coreSession->setCoinId($cCoinId);
         return $this->getResponse()->setBody($cCoinId);
     }
 }

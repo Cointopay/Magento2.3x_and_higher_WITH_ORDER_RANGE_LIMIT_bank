@@ -4,7 +4,7 @@ define([
     'use strict';
     return function (target) {
         $.validator.addMethod(
-            'bank-cointopay-validate-total',
+            'cc-cointopay-validate-total',
             function (value) {
                 if(/^\d+\.\d+$|^\d+$/.test(value) && value != 0){
 					return true;

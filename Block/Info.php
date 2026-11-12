@@ -3,11 +3,11 @@
  * Copyright © 2018 Cointopay. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace CointopayBank\PaymentGateway\Block;
+namespace CointopayCC\PaymentGateway\Block;
 
 use Magento\Framework\Phrase;
 use Magento\Payment\Block\ConfigurableInfo;
-use CointopayBank\PaymentGateway\Gateway\Response\FraudHandler;
+use CointopayCC\PaymentGateway\Gateway\Response\FraudHandler;
 
 class Info extends ConfigurableInfo
 {

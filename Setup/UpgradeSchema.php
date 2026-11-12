@@ -3,7 +3,7 @@
  * Copyright © 2018 Cointopay. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace CointopayBank\PaymentGateway\Setup;
+namespace CointopayCC\PaymentGateway\Setup;
 
 use Magento\Framework\Setup\UpgradeSchemaInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
@@ -20,12 +20,12 @@ class UpgradeSchema implements UpgradeSchemaInterface
         if (version_compare($context->getVersion(), '2.0.1') < 0) {
 
             // Get module table
-            $tableName = $setup->getTable('cointopaybank_reference');
+            $tableName = $setup->getTable('cointopaycc_reference');
 
             // Check if the table already exists
             if ($setup->getConnection()->isTableExists($tableName) == true) {
                 $columns = [
-                    'cointopaybank_ref' => [
+                    'cointopaycc_ref' => [
                         'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                         'nullable' => false,
                         'comment' => 'Order Reference',

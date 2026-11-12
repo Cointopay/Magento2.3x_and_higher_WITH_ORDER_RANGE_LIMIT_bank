@@ -1,6 +1,6 @@
 <?php
 
-namespace CointopayBank\PaymentGateway\Plugin\Order\Handler;
+namespace CointopayCC\PaymentGateway\Plugin\Order\Handler;
 
 use Magento\Sales\Model\Order;
 
@@ -20,7 +20,7 @@ class State
     public function afterCheck(\Magento\Sales\Model\ResourceModel\Order\Handler\State $subject, $result,  Order $order)
     {
 
-        if($order->getEntityType() == 'order' && $order->getPayment()->getMethod() == 'cointopaybank_gateway'){
+        if($order->getEntityType() == 'order' && $order->getPayment()->getMethod() == 'cointopaycc_gateway'){
             $order->setState(Order::STATE_PROCESSING)
                 ->setStatus('processing');
         }

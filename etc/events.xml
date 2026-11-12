@@ -8,12 +8,12 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
      <event name="payment_method_is_active">
-        <observer name="cointopaybank_payment_gateway" instance="CointopayBank\PaymentGateway\Observer\PaymentMethodAvailable" />
+        <observer name="cointopaycc_payment_gateway" instance="CointopayCC\PaymentGateway\Observer\PaymentMethodAvailable" />
     </event>
-	<event name="payment_method_assign_data_cointopaybank_gateway">
-        <observer name="cointopaybank_payment_gateway_data_assign" instance="CointopayBank\PaymentGateway\Observer\DataAssignObserver" />
+	<event name="payment_method_assign_data_cointopaycc_gateway">
+        <observer name="cointopaycc_payment_gateway_data_assign" instance="CointopayCC\PaymentGateway\Observer\DataAssignObserver" />
     </event>
     <event name="sales_order_place_after">
-        <observer name="ctpbank_place_order_after" instance="CointopayBank\PaymentGateway\Observer\SalesOrderPlaceAfterObserver" />
+        <observer name="ctpcc_place_order_after" instance="CointopayCC\PaymentGateway\Observer\SalesOrderPlaceAfterObserver" />
     </event>
 </config>

@@ -3,13 +3,13 @@
  * Copyright © 2018 Cointopay. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace CointopayBank\PaymentGateway\Test\Unit\Gateway\Request;
+namespace CointopayCC\PaymentGateway\Test\Unit\Gateway\Request;
 
 use Magento\Payment\Gateway\ConfigInterface;
 use Magento\Payment\Gateway\Data\OrderAdapterInterface;
 use Magento\Payment\Gateway\Data\PaymentDataObjectInterface;
 use Magento\Sales\Model\Order\Payment;
-use CointopayBank\PaymentGateway\Gateway\Request\VoidRequest;
+use CointopayCC\PaymentGateway\Gateway\Request\VoidRequest;
 
 class VoidRequestTest extends \PHPUnit_Framework_TestCase
 {

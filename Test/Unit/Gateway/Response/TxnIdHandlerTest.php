@@ -3,11 +3,11 @@
  * Copyright © 2018 Cointopay. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace CointopayBank\PaymentGateway\Test\Unit\Gateway\Response;
+namespace CointopayCC\PaymentGateway\Test\Unit\Gateway\Response;
 
 use Magento\Payment\Gateway\Data\PaymentDataObjectInterface;
 use Magento\Sales\Model\Order\Payment;
-use CointopayBank\PaymentGateway\Gateway\Response\TxnIdHandler;
+use CointopayCC\PaymentGateway\Gateway\Response\TxnIdHandler;
 
 class TxnIdHandlerTest extends \PHPUnit_Framework_TestCase
 {
